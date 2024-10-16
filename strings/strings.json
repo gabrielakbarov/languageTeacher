@@ -1,0 +1,12 @@
+{
+    "choose_topic": "Bitte wähle ein Thema aus:",
+    "input_topic_number": "Gib die Nummer des Themas ein: ",
+    "invalid_choice": "Ungültige Auswahl. Standardmäßig wird 'Alltag' gewählt.",
+    "no_words": "Es gibt keine Wörter für das Thema '{}'.",
+    "press_enter": "Drücke die Eingabetaste, um das Quiz zu beenden.",
+    "next_question": "Drücke Enter für die nächste Frage oder eine andere Taste zum Beenden.",
+    "ask_translation": "Was ist die deutsche Übersetzung für '{}'?",
+    "correct_answer": "Richtig!",
+    "wrong_answer": "Falsch! Die richtige Antwort ist '{}'.",
+    "all_words_learned": "Du hast alle Wörter gelernt!"
+}
