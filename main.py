@@ -1,10 +1,12 @@
 import csv
 import random
-import msvcrt
 import json
 
+# Lade Strings aus der JSON-Datei
 with open('strings/strings.json', 'r', encoding='utf-8') as f:
     strings = json.load(f)
+
+csv_file = 'dict/aserbaidschanisch_worter_erweitert.csv'
 
 
 def load_words(file_path):
@@ -30,10 +32,6 @@ def choose_topic():
         return strings["everyday-life"]
 
 
-def normalize_answer(answer):
-    return answer.lower().replace('.', '').replace('?', '').replace(' ', '').strip()
-
-
 def quiz_word(topic_words, asked_words):
     if len(asked_words) == len(topic_words):
         print(strings["all_words_learned"])
@@ -45,15 +43,20 @@ def quiz_word(topic_words, asked_words):
 
     asked_words.add(word["Aserbaidschanisch"])
     az_word = word["Aserbaidschanisch"]
-    correct_answer = word["Deutsch"]
+    correct_answers = word["Deutsch"].split(",")
+    user_answer = input(strings["ask_translation"].format(az_word)).strip().lower()
 
-    user_answer = input(strings["ask_translation"].format(az_word))
-    if normalize_answer(user_answer) == normalize_answer(correct_answer):
+
+    if user_answer == 'q':
+        return True
+
+    if any(user_answer == answer.strip().lower() for answer in correct_answers):
         print(strings["correct_answer"])
     else:
-        print(strings["wrong_answer"].format(correct_answer))
+        print(strings["wrong_answer"].format(correct_answers[0].strip()))  # Zeige die erste korrekte Antwort
 
     return False
+
 
 
 def start_quiz():
@@ -70,19 +73,11 @@ def start_quiz():
         print(strings["no_words"].format(chosen_topic))
         return
 
-    print(strings["press_enter"])
-
     asked_words = set()
 
     while True:
         if quiz_word(topic_words, asked_words):
             break
-
-        print(strings["next_question"])
-
-        if msvcrt.kbhit():
-            if msvcrt.getch() == b'\r':
-                break
 
 
 if __name__ == "__main__":
